@@ -1,8 +1,8 @@
 # Cluster MongoDB en con sharding sobre Kubernetes
 
-Mongo db  shard cluster built on kubernetes. This configuration include:
- - 3 node as config replica set
- - 1 la configuración está establecida en 1 shard, pero se pueden configurar hasta 4 con tantas réplicas como se necesite
+MongoDB en modo clúster con un shard construido sobre kubernetes. La configuración actual es:
+ - 3 nodos replica set
+ - 1 shard, la configuración actual está establecida en 1 shard, pero se pueden configurar hasta 4 con tantas réplicas como se necesite
  - 2 nodos MongoDB como routers
 
 ## Desplegar el cluster de Mongo
