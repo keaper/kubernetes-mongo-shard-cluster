@@ -27,7 +27,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh1-1
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongosh1-1
         ports:
         - name: mongosh1-1
@@ -36,7 +36,7 @@ spec:
             - name: mongosh1-1
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all", "--shardsvr"]
       volumes:
         - name: mongosh1-1
           #persistentVolumeClaim:
@@ -71,7 +71,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh1-2
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongosh1-2
         ports:
         - name: mongosh1-2
@@ -80,7 +80,7 @@ spec:
             - name: mongosh1-2
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all", "--shardsvr"]
       volumes:
         - name: mongosh1-2
           #persistentVolumeClaim:
@@ -115,7 +115,7 @@ spec:
       restartPolicy: Always
       hostname: mongosh1-3
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongosh1-3
         ports:
         - name: mongosh1-3
@@ -124,7 +124,7 @@ spec:
             - name: mongosh1-3
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all"]
+        args: ["--replSet", "rs1", "--dbpath","/data/db", "--noauth", "--port", "27017", "--bind_ip_all", "--shardsvr"]
       volumes:
         - name: mongosh1-3
           #persistentVolumeClaim:
