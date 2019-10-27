@@ -1,29 +1,29 @@
-# Kubernetes mongodb shard cluster
+# Cluster MongoDB en con sharding sobre Kubernetes
 
 Mongo db  shard cluster built on kubernetes. This configuration include:
  - 3 node as config replica set
- - 4 shard  with 3 node as replica set for each shard
- - 2 node as mongos router
+ - 1 la configuración está establecida en 1 shard, pero se pueden configurar hasta 4 con tantas réplicas como se necesite
+ - 2 nodos MongoDB como routers
 
-## Deploy cluster
-In your master node do
+## Desplegar el cluster de Mongo
+
 
 ```sh
 chmod +x initiate.sh
 ./initiate.sh
 ```
-`initate.sh` will deploy for you all pods and will create all needed services.
-## Connecting to mongo
-For example to connect to your cluster do from a pod
+`initate.sh` lanzará todos los servicios dentro de k8s, pero sin salida a internet.
+## Conectando al Mongo
+
+Desde un POD
 ```sh
 mongo mongodb://mongos1:27017
 ```
-to view the cluster status from a mongo shell do
 
 ```sh
 sh.status()
 ```
-and the output should be
+La salida debería ser 
 
 ```
 mongos> sh.status()
@@ -32,23 +32,22 @@ mongos> sh.status()
 ...
 shards:
         {  "_id" : "rs1",  "host" : "rs1/mongosh1-1:27017,mongosh1-2:27017,mongosh1-3:27017",  "state" : 1 }
-        {  "_id" : "rs2",  "host" : "rs2/mongosh2-1:27017,mongosh2-2:27017,mongosh2-3:27017",  "state" : 1 }
-        {  "_id" : "rs3",  "host" : "rs3/mongosh3-1:27017,mongosh3-2:27017,mongosh3-3:27017",  "state" : 1 }
-        {  "_id" : "rs4",  "host" : "rs4/mongosh4-1:27017,mongosh4-2:27017,mongosh4-3:27017",  "state" : 1 }
 ...
 
 ```
-## Clean
+Si se quiere hacer desde fuera, se puede configurar el servicio "mongos1-service" que utiliza NodePort para acceder al router 1. 
 
-To remove all pods
+## Limpieza
+
+Para borrar todos los artefactos de k8s creados
 ```sh
 ./clean.sh
 ```
 
-## Deploy different number of shard replica set
+## Diferentes configuraciones
 
-- Edit in `config` file `SHARD_REPLICA_SET` and set the desired number
-- Create for each additional replica set a file named `mongo_sh_N.yaml`
-- Copy content from `mongo_sh_1.yaml`
-- Replace all occurrences of `mongosh1` with `mongoshN`  
-- Replace all occurrences of `rs1` with `rsN`
+- Editar el fichero `config`, y modificar `SHARD_REPLICA_SET` por el valor requerido.
+- Crear una shard adicional requiere crear un fichero nuevo `mongo_sh_N.yaml`
+- Puedes copiar/pegar el contenido de`mongo_sh_1.yaml`
+- Cambiar los valores `mongosh1` por `mongoshN`  
+- Cambiar los valores `rs1` por `rsN`
