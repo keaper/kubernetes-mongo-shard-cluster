@@ -26,7 +26,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg1
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongocfg1
         ports:
         - name: mongocfg1
@@ -35,7 +35,7 @@ spec:
             - name: mongocfg1
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg1
           #persistentVolumeClaim:
@@ -69,7 +69,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg2
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongocfg2
         ports:
         - name: mongocfg2
@@ -78,7 +78,7 @@ spec:
             - name: mongocfg2
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg2
           #persistentVolumeClaim:
@@ -112,7 +112,7 @@ spec:
       restartPolicy: Always
       hostname: mongocfg3
       containers:
-      - image: mongo:latest
+      - image: mongo:4.2
         name: mongocfg3
         ports:
         - name: mongocfg3
@@ -121,7 +121,7 @@ spec:
             - name: mongocfg3
               mountPath: /data/db
         command: ["mongod"]
-        args: ["--noprealloc", "--smallfiles", "--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
+        args: ["--replSet", "cfgrs", "--dbpath","/data/db", "--configsvr", "--noauth", "--bind_ip_all"]
       volumes:
         - name: mongocfg3
           #persistentVolumeClaim:
